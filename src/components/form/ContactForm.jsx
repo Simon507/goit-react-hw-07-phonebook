@@ -1,7 +1,8 @@
 import { nanoid } from 'nanoid';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addContactList } from '../../redux/editingSlice';
+
+import { addContacts } from 'redux/operations';
 import { selectContactList } from '../../redux/selectors';
 
 import { Formik, Field } from 'formik';
@@ -24,7 +25,7 @@ const validationSchema = Yup.object({
     .required('Required'),
 });
 
-export const ContactForm = ({ addContact }) => {
+export const ContactForm = () => {
   const stateValue = useSelector(selectContactList);
   const dispatch = useDispatch();
 
@@ -45,7 +46,10 @@ export const ContactForm = ({ addContact }) => {
           return alert(`${values.name} is already exist in contacts`);
         }
 
-        dispatch(addContactList(id, values.name, values.number));
+        dispatch(addContacts(id, values.name, values.number));
+
+        // dispatch(fetchContacts());
+
         actions.resetForm();
       }}
     >

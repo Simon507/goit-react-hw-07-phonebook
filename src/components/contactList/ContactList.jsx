@@ -9,16 +9,14 @@ import {
   selectIsLoading,
 } from '../../redux/selectors';
 
-import { fetchContacts } from 'redux/operations';
-
-import { deleteFromList } from '../../redux/editingSlice';
+import { fetchContacts, deleteContacts } from 'redux/operations';
 
 import { ContactCard, ContactLst } from './contactList.styles';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
   // Отримуємо частини стану
-  // const { contactList, isLoading, error } = useSelector(selectContactList);
+
   // Викликаємо операцію
   useEffect(() => {
     dispatch(fetchContacts());
@@ -38,7 +36,8 @@ export const ContactList = () => {
   // const dispatch = useDispatch();
 
   const onDelete = item => {
-    dispatch(deleteFromList(item));
+    dispatch(deleteContacts(item));
+    // dispatch(fetchContacts());
   };
 
   return (

@@ -23,6 +23,30 @@ const editingSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    addInProgress(state) {
+      state.isLoading = true;
+    },
+    addingSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.contactList = action.payload;
+    },
+    addingError(state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    deleteInProgress(state) {
+      state.isLoading = true;
+    },
+    deletingSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.contactList = action.payload;
+    },
+    deletingError(state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -30,8 +54,12 @@ export const {
   fetchingInProgress,
   fetchingSuccess,
   fetchingError,
-  addContactList,
-  deleteFromList,
+  addInProgress,
+  addingSuccess,
+  addingError,
+  deleteInProgress,
+  deletingSuccess,
+  deletingError,
 } = editingSlice.actions;
 
 export const editingReducer = editingSlice.reducer;
