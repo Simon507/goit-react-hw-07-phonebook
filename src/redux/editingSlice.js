@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// для хранилища
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-
 const editingInitialState = {
   contactList: [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -39,15 +35,5 @@ const editingSlice = createSlice({
   },
 });
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  whiteList: ['contactList'],
-};
-
-export const persistedEditingReducer = persistReducer(
-  persistConfig,
-  editingSlice.reducer
-);
-
 export const { addContactList, deleteFromList } = editingSlice.actions;
+export const editingReducer = editingSlice.reducer;

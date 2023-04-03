@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { addContactList } from '../../redux/editingSlice';
-import { getContactList } from '../../redux/selectors';
+import { selectContactList } from '../../redux/selectors';
 
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
@@ -25,7 +25,7 @@ const validationSchema = Yup.object({
 });
 
 export const ContactForm = ({ addContact }) => {
-  const stateValue = useSelector(getContactList);
+  const stateValue = useSelector(selectContactList);
   const dispatch = useDispatch();
 
   return (

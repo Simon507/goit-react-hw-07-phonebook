@@ -1,15 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getContactList, getFindTarget } from '../../redux/selectors';
+import { selectContactList, selectFindTarget } from '../../redux/selectors';
 
 import { deleteFromList } from '../../redux/editingSlice';
 
 import { ContactCard, ContactLst } from './contactList.styles';
 
 export const ContactList = () => {
-  const value = useSelector(getContactList);
+  const value = useSelector(selectContactList);
 
-  const find = useSelector(getFindTarget);
+  const find = useSelector(selectFindTarget);
 
   const dispatch = useDispatch();
 
