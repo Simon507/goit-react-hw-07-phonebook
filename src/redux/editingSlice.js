@@ -11,26 +11,6 @@ const editingSlice = createSlice({
   initialState: editingInitialState,
 
   reducers: {
-    // addContactList: {
-    //   reducer(state, action) {
-    //     state.contactList.push(action.payload);
-    //   },
-
-    //   prepare(friendId, friendName, friendNumber) {
-    //     return {
-    //       payload: {
-    //         id: friendId,
-    //         name: friendName,
-    //         number: friendNumber,
-    //       },
-    //     };
-    //   },
-    // },
-
-    // deleteFromList(state, action) {
-    //   state.contactList.splice(action.payload, 1);
-    // },
-
     fetchingInProgress(state) {
       state.isLoading = true;
     },
