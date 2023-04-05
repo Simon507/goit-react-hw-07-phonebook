@@ -46,7 +46,8 @@ export const ContactForm = () => {
           return alert(`${values.name} is already exist in contacts`);
         }
 
-        dispatch(addContacts(id, values.name, values.number));
+        const addValue = { name: values.name, phone: values.number, id: id };
+        dispatch(addContacts(addValue));
         actions.resetForm();
       }}
     >
