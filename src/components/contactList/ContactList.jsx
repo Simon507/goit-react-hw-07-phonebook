@@ -15,29 +15,19 @@ import { ContactCard, ContactLst } from './contactList.styles';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  // Отримуємо частини стану
 
-  // Викликаємо операцію
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-  // Рендерим розмітку в залежності від значень у стані
 
   const value = useSelector(selectContactList);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectError);
 
-  console.log(value);
-  console.log(isLoading);
-  console.log(isError);
-
   const find = useSelector(selectFindTarget);
-
-  // const dispatch = useDispatch();
 
   const onDelete = item => {
     dispatch(deleteContacts(item));
-    // dispatch(fetchContacts());
   };
 
   return (

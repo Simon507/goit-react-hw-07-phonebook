@@ -1,65 +1,54 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { fetchContacts, addContacts, deleteContacts } from './operations';
+
 const editingInitialState = {
   contactList: [],
   isLoading: false,
   error: null,
 };
 
+const isPending = state => {
+  state.isLoading = true;
+};
+
+const isRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
+
 const editingSlice = createSlice({
   name: 'contactList',
   initialState: editingInitialState,
 
-  reducers: {
-    fetchingInProgress(state) {
-      state.isLoading = true;
-    },
-    fetchingSuccess(state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contactList = action.payload;
-    },
-    fetchingError(state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    addInProgress(state) {
-      state.isLoading = true;
-    },
-    addingSuccess(state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contactList = action.payload;
-    },
-    addingError(state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    deleteInProgress(state) {
-      state.isLoading = true;
-    },
-    deletingSuccess(state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contactList = action.payload;
-    },
-    deletingError(state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-  },
-});
+  extraReducers: builder =>
+    builder
+      .addCase(fetchContacts.pending, isPending)
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contactList = action.payload;
+      })
+      .addCase(fetchContacts.rejected, isRejected)
 
-export const {
-  fetchingInProgress,
-  fetchingSuccess,
-  fetchingError,
-  addInProgress,
-  addingSuccess,
-  addingError,
-  deleteInProgress,
-  deletingSuccess,
-  deletingError,
-} = editingSlice.actions;
+      .addCase(addContacts.pending, isPending)
+      .addCase(addContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contactList.push(action.payload);
+      })
+      .addCase(addContacts.rejected, isRejected)
+
+      .addCase(deleteContacts.pending, isPending)
+      .addCase(deleteContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.contactList.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.contactList.splice(index, 1);
+      })
+      .addCase(deleteContacts.rejected, isRejected),
+});
 
 export const editingReducer = editingSlice.reducer;
